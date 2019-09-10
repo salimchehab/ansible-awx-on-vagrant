@@ -1,0 +1,33 @@
+---
+- name: Create the awx user and distribute the previously generated public key to the nodes
+  hosts: nodes
+  gather_facts: no
+  become: yes
+
+  tasks:
+    - name: Create awx group
+      group:
+        name: "{{ awx_user }}"
+        gid: 1010
+
+    - name: Add awx user to the awx group
+      user:
+        name: "{{ awx_user }}"
+        comment: Ansible AWX
+        uid: 1010
+        group: "{{ awx_group }}"
+
+    - name: Deploy public awx ssh key (private key generated on the awx host)
+      authorized_key:
+        user: "{{ awx_user }}"
+        state: present
+        key: "{{ lookup('file', awx_pub_local_ssh_key_path) }}"
+
+    - name: Enable "{{ awx_user }}" to sudo without password
+      copy:
+        content: "{{ awx_user }}   ALL=(ALL)   NOPASSWD: ALL\n"
+        dest: "/etc/sudoers.d/awx"
+        mode: u=rw,g=r,o=r
+        owner: root
+        group: root
+        validate: "/usr/sbin/visudo -cf %s"

@@ -1,0 +1,9 @@
+awx_user: "awx"
+awx_group: "awx"
+awx_priv_ssh_key_filename: "id_rsa_awx"
+awx_pub_ssh_key_filename: "{{ awx_priv_ssh_key_filename }}.pub"
+awx_pub_local_ssh_key_path: "./files/{{ awx_pub_ssh_key_filename }}"
+
+awx_admin_user: "admin"
+awx_admin_password: "{{ vault_awx_admin_password }}"
+awx_host: "https://awx"

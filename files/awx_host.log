@@ -1,0 +1,501 @@
+$ vagrant ssh awx
+Last login: Tue Sep 10 16:36:17 2019 from 10.0.2.2
+-bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+[vagrant@awx ~]$ sudo docker ps
+CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                                                 NAMES
+c73a56c479cf        ansible/awx_task:6.1.0       "/tini -- /bin/sh -c…"   8 minutes ago       Up 7 minutes        8052/tcp                                              awx_task
+41e10fdb05ed        ansible/awx_web:6.1.0        "/tini -- /bin/sh -c…"   8 minutes ago       Up 7 minutes        0.0.0.0:80->8052/tcp                                  awx_web
+358b293755b9        postgres:9.6                 "docker-entrypoint.s…"   8 minutes ago       Up 7 minutes        5432/tcp                                              awx_postgres
+fd96832e3769        memcached:alpine             "docker-entrypoint.s…"   8 minutes ago       Up 7 minutes        11211/tcp                                             awx_memcached
+ff4e913cd0fd        ansible/awx_rabbitmq:3.7.4   "docker-entrypoint.s…"   8 minutes ago       Up 7 minutes        4369/tcp, 5671-5672/tcp, 15671-15672/tcp, 25672/tcp   awx_rabbitmq
+[vagrant@awx ~]$ sudo docker logs awx_task
+Using /etc/ansible/ansible.cfg as config file
+127.0.0.1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "elapsed": 0,
+    "match_groupdict": {},
+    "match_groups": [],
+    "path": null,
+    "port": 5432,
+    "search_regex": null,
+    "state": "started"
+}
+Using /etc/ansible/ansible.cfg as config file
+127.0.0.1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "elapsed": 0,
+    "match_groupdict": {},
+    "match_groups": [],
+    "path": null,
+    "port": 11211,
+    "search_regex": null,
+    "state": "started"
+}
+Using /etc/ansible/ansible.cfg as config file
+127.0.0.1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "elapsed": 16,
+    "match_groupdict": {},
+    "match_groups": [],
+    "path": null,
+    "port": 5672,
+    "search_regex": null,
+    "state": "started"
+}
+Using /etc/ansible/ansible.cfg as config file
+127.0.0.1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "db": "awx"
+}
+2019-09-10 16:37:23,048 DEBUG    awx.main.migrations Removing all Rackspace InventorySource from database.
+2019-09-10 16:37:23,196 DEBUG    awx.main.migrations Removing all Azure Credentials from database.
+2019-09-10 16:37:23,281 DEBUG    awx.main.migrations Removing all Azure InventorySource from database.
+2019-09-10 16:37:23,368 DEBUG    awx.main.migrations Removing all InventorySource that have no link to an Inventory from database.
+2019-09-10 16:37:40,572 INFO     rbac_migrations Computing role roots..
+2019-09-10 16:37:40,573 INFO     rbac_migrations Found 0 roots in 0.000114 seconds, rebuilding ancestry map
+2019-09-10 16:37:40,573 INFO     rbac_migrations Rebuild completed in 0.000004 seconds
+2019-09-10 16:37:40,573 INFO     rbac_migrations Done.
+2019-09-10 16:37:42,177 INFO     rbac_migrations Computing role roots..
+2019-09-10 16:37:42,178 INFO     rbac_migrations Found 0 roots in 0.000101 seconds, rebuilding ancestry map
+2019-09-10 16:37:42,178 INFO     rbac_migrations Rebuild completed in 0.000004 seconds
+2019-09-10 16:37:42,178 INFO     rbac_migrations Done.
+2019-09-10 16:37:49,136 DEBUG    awx.main.models.credential adding Machine credential type
+2019-09-10 16:37:49,274 DEBUG    awx.main.models.credential adding Source Control credential type
+2019-09-10 16:37:49,279 DEBUG    awx.main.models.credential adding Vault credential type
+2019-09-10 16:37:49,285 DEBUG    awx.main.models.credential adding Network credential type
+2019-09-10 16:37:49,290 DEBUG    awx.main.models.credential adding Amazon Web Services credential type
+2019-09-10 16:37:49,296 DEBUG    awx.main.models.credential adding OpenStack credential type
+2019-09-10 16:37:49,302 DEBUG    awx.main.models.credential adding VMware vCenter credential type
+2019-09-10 16:37:49,307 DEBUG    awx.main.models.credential adding Red Hat Satellite 6 credential type
+2019-09-10 16:37:49,312 DEBUG    awx.main.models.credential adding Red Hat CloudForms credential type
+2019-09-10 16:37:49,317 DEBUG    awx.main.models.credential adding Google Compute Engine credential type
+2019-09-10 16:37:49,323 DEBUG    awx.main.models.credential adding Microsoft Azure Resource Manager credential type
+2019-09-10 16:37:49,328 DEBUG    awx.main.models.credential adding Insights credential type
+2019-09-10 16:37:49,333 DEBUG    awx.main.models.credential adding Red Hat Virtualization credential type
+2019-09-10 16:37:49,338 DEBUG    awx.main.models.credential adding Ansible Tower credential type
+2019-09-10 16:37:49,344 DEBUG    awx.main.models.credential adding CyberArk AIM Secret Lookup credential type
+2019-09-10 16:37:49,349 DEBUG    awx.main.models.credential adding Microsoft Azure Key Vault credential type
+2019-09-10 16:37:49,355 DEBUG    awx.main.models.credential adding CyberArk Conjur Secret Lookup credential type
+2019-09-10 16:37:49,361 DEBUG    awx.main.models.credential adding HashiCorp Vault Secret Lookup credential type
+2019-09-10 16:37:49,367 DEBUG    awx.main.models.credential adding HashiCorp Vault Signed SSH credential type
+2019-09-10 16:37:50,743 DEBUG    awx.main.migrations Migrating inventory instance_id for gce to gce_id
+Operations to perform:
+  Apply all migrations: auth, conf, contenttypes, main, oauth2_provider, sessions, sites, social_django, sso, taggit
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying taggit.0001_initial... OK
+  Applying taggit.0002_auto_20150616_2121... OK
+  Applying auth.0001_initial... OK
+  Applying main.0001_initial... OK
+  Applying main.0002_squashed_v300_release... OK
+  Applying main.0003_squashed_v300_v303_updates... OK
+  Applying main.0004_squashed_v310_release... OK
+  Applying conf.0001_initial... OK
+  Applying conf.0002_v310_copy_tower_settings... OK
+  Applying main.0005_squashed_v310_v313_updates... OK
+  Applying main.0006_v320_release... OK
+  Applying main.0007_v320_data_migrations... OK
+  Applying main.0008_v320_drop_v1_credential_fields... OK
+  Applying main.0009_v322_add_setting_field_for_activity_stream... OK
+  Applying main.0010_v322_add_ovirt4_tower_inventory... OK
+  Applying main.0011_v322_encrypt_survey_passwords... OK
+  Applying main.0012_v322_update_cred_types... OK
+  Applying main.0013_v330_multi_credential... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying conf.0003_v310_JSONField_changes... OK
+  Applying conf.0004_v320_reencrypt... OK
+  Applying conf.0005_v330_rename_two_session_settings... OK
+  Applying conf.0006_v331_ldap_group_type... OK
+  Applying sessions.0001_initial... OK
+  Applying main.0014_v330_saved_launchtime_configs... OK
+  Applying main.0015_v330_blank_start_args... OK
+  Applying main.0016_v330_non_blank_workflow... OK
+  Applying main.0017_v330_move_deprecated_stdout... OK
+  Applying main.0018_v330_add_additional_stdout_events... OK
+  Applying main.0019_v330_custom_virtualenv... OK
+  Applying main.0020_v330_instancegroup_policies... OK
+  Applying main.0021_v330_declare_new_rbac_roles... OK
+  Applying main.0022_v330_create_new_rbac_roles... OK
+  Applying main.0023_v330_inventory_multicred... OK
+  Applying main.0024_v330_create_user_session_membership... OK
+  Applying main.0025_v330_add_oauth_activity_stream_registrar... OK
+  Applying oauth2_provider.0001_initial... OK
+  Applying main.0026_v330_delete_authtoken... OK
+  Applying main.0027_v330_emitted_events... OK
+  Applying main.0028_v330_add_tower_verify... OK
+  Applying main.0030_v330_modify_application... OK
+  Applying main.0031_v330_encrypt_oauth2_secret... OK
+  Applying main.0032_v330_polymorphic_delete... OK
+  Applying main.0033_v330_oauth_help_text... OK
+  Applying main.0034_v330_delete_user_role... OK
+  Applying main.0035_v330_more_oauth2_help_text... OK
+  Applying main.0036_v330_credtype_remove_become_methods... OK
+  Applying main.0037_v330_remove_legacy_fact_cleanup... OK
+  Applying main.0038_v330_add_deleted_activitystream_actor... OK
+  Applying main.0039_v330_custom_venv_help_text... OK
+  Applying main.0040_v330_unifiedjob_controller_node... OK
+  Applying main.0041_v330_update_oauth_refreshtoken... OK
+  Applying main.0042_v330_org_member_role_deparent... OK
+  Applying main.0043_v330_oauth2accesstoken_modified... OK
+  Applying main.0044_v330_add_inventory_update_inventory... OK
+  Applying main.0045_v330_instance_managed_by_policy... OK
+  Applying main.0046_v330_remove_client_credentials_grant... OK
+  Applying main.0047_v330_activitystream_instance... OK
+  Applying main.0048_v330_django_created_modified_by_model_name... OK
+  Applying main.0049_v330_validate_instance_capacity_adjustment... OK
+  Applying main.0050_v340_drop_celery_tables... OK
+  Applying main.0051_v340_job_slicing... OK
+  Applying main.0052_v340_remove_project_scm_delete_on_next_update... OK
+  Applying main.0053_v340_workflow_inventory... OK
+  Applying main.0054_v340_workflow_convergence... OK
+  Applying main.0055_v340_add_grafana_notification... OK
+  Applying main.0056_v350_custom_venv_history... OK
+  Applying main.0057_v350_remove_become_method_type... OK
+  Applying main.0058_v350_remove_limit_limit... OK
+  Applying main.0059_v350_remove_adhoc_limit... OK
+  Applying main.0060_v350_update_schedule_uniqueness_constraint... OK
+  Applying main.0061_v350_track_native_credentialtype_source... OK
+  Applying main.0062_v350_new_playbook_stats... OK
+  Applying main.0063_v350_org_host_limits... OK
+  Applying main.0064_v350_analytics_state... OK
+  Applying main.0065_v350_index_job_status... OK
+  Applying main.0066_v350_inventorysource_custom_virtualenv... OK
+  Applying main.0067_v350_credential_plugins... OK
+  Applying main.0068_v350_index_event_created... OK
+  Applying main.0069_v350_generate_unique_install_uuid... OK
+  Applying main.0070_v350_gce_instance_id... OK
+  Applying main.0071_v350_remove_system_tracking... OK
+  Applying main.0072_v350_deprecate_fields... OK
+  Applying main.0073_v360_create_instance_group_m2m... OK
+  Applying main.0074_v360_migrate_instance_group_relations... OK
+  Applying main.0075_v360_remove_old_instance_group_relations... OK
+  Applying main.0076_v360_add_new_instance_group_relations... OK
+  Applying main.0077_v360_add_default_orderings... OK
+  Applying main.0078_v360_clear_sessions_tokens_jt... OK
+  Applying main.0079_v360_rm_implicit_oauth2_apps... OK
+  Applying main.0080_v360_replace_job_origin... OK
+  Applying main.0081_v360_notify_on_start... OK
+  Applying oauth2_provider.0002_08_updates... OK
+  Applying oauth2_provider.0003_auto_20160316_1503... OK
+  Applying oauth2_provider.0004_auto_20160525_1623... OK
+  Applying oauth2_provider.0005_auto_20170514_1141... OK
+  Applying oauth2_provider.0006_auto_20171214_2232... OK
+  Applying sites.0001_initial... OK
+  Applying sites.0002_alter_domain_unique... OK
+  Applying social_django.0001_initial... OK
+  Applying social_django.0002_add_related_name... OK
+  Applying social_django.0003_alter_email_max_length... OK
+  Applying social_django.0004_auto_20160423_0400... OK
+  Applying social_django.0005_auto_20160727_2333... OK
+  Applying social_django.0006_partial... OK
+  Applying social_django.0007_code_timestamp... OK
+  Applying social_django.0008_partial_timestamp... OK
+  Applying sso.0001_initial... OK
+  Applying sso.0002_expand_provider_options... OK
+Default organization added.
+Demo Credential, Inventory, and Job Template added.
+(changed: True)
+2019-09-10 16:38:10,408 DEBUG    awx.main.dispatch publish awx.main.tasks.apply_cluster_membership_policies(006246b3-dd0c-4e3b-b870-b6a1a821d211, queue=awx_private_queue)
+Successfully registered instance awx
+(changed: True)
+2019-09-10 16:38:12,117 DEBUG    awx.main.dispatch publish awx.main.tasks.apply_cluster_membership_policies(c647e078-2b8f-4472-9568-d4b0ca83b68e, queue=awx_private_queue)
+2019-09-10 16:38:12,140 DEBUG    awx.main.dispatch publish awx.main.tasks.apply_cluster_membership_policies(77820fbf-d5aa-471a-903a-a8b0c19c5603, queue=awx_private_queue)
+Creating instance group tower
+(changed: True)
+2019-09-10 16:38:12,544 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2019-09-10 16:38:12,563 INFO RPC interface 'supervisor' initialized
+2019-09-10 16:38:12,563 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2019-09-10 16:38:12,563 INFO supervisord started with pid 180
+2019-09-10 16:38:13,567 INFO spawned: 'awx-config-watcher' with pid 183
+2019-09-10 16:38:13,574 INFO spawned: 'channels-worker' with pid 184
+2019-09-10 16:38:13,576 INFO spawned: 'callback-receiver' with pid 185
+2019-09-10 16:38:13,578 INFO spawned: 'dispatcher' with pid 186
+READY
+2019-09-10 16:38:14,716 INFO success: awx-config-watcher entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2019-09-10 16:38:14,716 INFO success: channels-worker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2019-09-10 16:38:14,716 INFO success: callback-receiver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2019-09-10 16:38:14,716 INFO success: dispatcher entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2019-09-10 16:38:18,207 WARNING  awx.main.commands.run_callback_receiver scaling up worker pid:200
+2019-09-10 16:38:18,207 WARNING  awx.main.commands.run_callback_receiver scaling up worker pid:200
+2019-09-10 16:38:18,240 WARNING  awx.main.commands.run_callback_receiver scaling up worker pid:201
+2019-09-10 16:38:18,240 WARNING  awx.main.commands.run_callback_receiver scaling up worker pid:201
+2019-09-10 16:38:18,274 WARNING  awx.main.commands.run_callback_receiver scaling up worker pid:202
+2019-09-10 16:38:18,274 WARNING  awx.main.commands.run_callback_receiver scaling up worker pid:202
+2019-09-10 16:38:18,307 WARNING  awx.main.commands.run_callback_receiver scaling up worker pid:203
+2019-09-10 16:38:18,307 WARNING  awx.main.commands.run_callback_receiver scaling up worker pid:203
+2019-09-10 16:38:18,341 WARNING  awx.main.dispatch scaling up worker pid:204
+2019-09-10 16:38:18,361 - INFO - runworker - Using single-threaded worker.
+2019-09-10 16:38:18,361 - INFO - runworker - Running worker against channel layer default (asgi_amqp.core.AMQPChannelLayer)
+2019-09-10 16:38:18,362 - INFO - worker - Listening on channels websocket.connect, websocket.disconnect, websocket.receive
+2019-09-10 16:38:18,373 WARNING  awx.main.dispatch scaling up worker pid:205
+2019-09-10 16:38:18,391 WARNING  awx.main.dispatch scaling up worker pid:206
+2019-09-10 16:38:18,411 WARNING  awx.main.dispatch scaling up worker pid:207
+2019-09-10 16:38:18,420 DEBUG    awx.main.tasks Syncing Schedules
+2019-09-10 16:38:18,639 DEBUG    awx.main.tasks Waited 0.0002541542053222656 seconds to obtain lock name: cluster_policy_lock
+2019-09-10 16:38:18,647 DEBUG    awx.main.tasks Total non-isolated instances:1 available for policy: 1
+2019-09-10 16:38:18,648 DEBUG    awx.main.tasks Policy percentage, adding Instances [1] to Group tower
+2019-09-10 16:38:18,649 DEBUG    awx.main.tasks Adding instances [1] to group tower
+2019-09-10 16:38:18,652 DEBUG    awx.main.tasks Cluster policy computation finished in 0.011202573776245117 seconds
+2019-09-10 16:38:18,652 DEBUG    awx.main.tasks Cluster node heartbeat task.
+2019-09-10 16:38:18,670 DEBUG    awx.main.dispatch listening on ['awx_private_queue [direct]', 'awx [direct]', 'tower_broadcast_all_awx [fanout]']
+2019-09-10 16:38:38,633 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(b151b9b7-1a2e-434e-9129-88bd4d7f4e58, queue=awx_private_queue)
+[2019-09-10 16:38:38,633: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(b151b9b7-1a2e-434e-9129-88bd4d7f4e58, queue=awx_private_queue)
+2019-09-10 16:38:38,654 DEBUG    awx.main.dispatch delivered b151b9b7-1a2e-434e-9129-88bd4d7f4e58 to worker[206] qsize 0
+2019-09-10 16:38:38,658 DEBUG    awx.main.dispatch task b151b9b7-1a2e-434e-9129-88bd4d7f4e58 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:38:38,661 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:38:38,674 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:38:38,704 DEBUG    awx.main.dispatch task b151b9b7-1a2e-434e-9129-88bd4d7f4e58 is finished
+2019-09-10 16:38:48,609 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(80a34749-c8ab-44cc-80c2-31acce4f7ac1, queue=awx_private_queue)
+[2019-09-10 16:38:48,609: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(80a34749-c8ab-44cc-80c2-31acce4f7ac1, queue=awx_private_queue)
+2019-09-10 16:38:48,628 DEBUG    awx.main.dispatch delivered 80a34749-c8ab-44cc-80c2-31acce4f7ac1 to worker[205] qsize 0
+2019-09-10 16:38:48,631 DEBUG    awx.main.dispatch task 80a34749-c8ab-44cc-80c2-31acce4f7ac1 starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:38:48,639 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:38:48,645 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:38:48.644183+00:00
+2019-09-10 16:38:48,655 DEBUG    awx.main.dispatch task 80a34749-c8ab-44cc-80c2-31acce4f7ac1 is finished
+2019-09-10 16:38:58,622 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(aeff7909-43b1-47a3-b2a8-8fdce548bca6, queue=awx_private_queue)
+[2019-09-10 16:38:58,622: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(aeff7909-43b1-47a3-b2a8-8fdce548bca6, queue=awx_private_queue)
+2019-09-10 16:38:58,648 DEBUG    awx.main.dispatch delivered aeff7909-43b1-47a3-b2a8-8fdce548bca6 to worker[204] qsize 0
+2019-09-10 16:38:58,652 DEBUG    awx.main.dispatch task aeff7909-43b1-47a3-b2a8-8fdce548bca6 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:38:58,656 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:38:58,669 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:38:58,687 DEBUG    awx.main.dispatch task aeff7909-43b1-47a3-b2a8-8fdce548bca6 is finished
+RESULT 2
+OKREADY
+2019-09-10 16:39:18,611 DEBUG    awx.main.dispatch publish awx.main.tasks.cluster_node_heartbeat(30e1c774-5ed6-4407-971b-26a52dba1a85, queue=awx)
+[2019-09-10 16:39:18,611: DEBUG/Process-1] publish awx.main.tasks.cluster_node_heartbeat(30e1c774-5ed6-4407-971b-26a52dba1a85, queue=awx)
+2019-09-10 16:39:18,723 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(3a2e7fe6-c18b-442d-9b42-6eec90ed73d6, queue=awx_private_queue)
+[2019-09-10 16:39:18,723: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(3a2e7fe6-c18b-442d-9b42-6eec90ed73d6, queue=awx_private_queue)
+2019-09-10 16:39:18,729 DEBUG    awx.main.dispatch delivered 30e1c774-5ed6-4407-971b-26a52dba1a85 to worker[207] qsize 0
+2019-09-10 16:39:18,736 DEBUG    awx.main.dispatch task 30e1c774-5ed6-4407-971b-26a52dba1a85 starting awx.main.tasks.cluster_node_heartbeat(*[])
+2019-09-10 16:39:18,741 DEBUG    awx.main.tasks Cluster node heartbeat task.
+2019-09-10 16:39:18,748 DEBUG    awx.main.dispatch delivered 3a2e7fe6-c18b-442d-9b42-6eec90ed73d6 to worker[205] qsize 0
+2019-09-10 16:39:18,750 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(99edd66f-b9ee-4438-9d43-05e0649ce269, queue=awx_private_queue)
+[2019-09-10 16:39:18,750: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(99edd66f-b9ee-4438-9d43-05e0649ce269, queue=awx_private_queue)
+2019-09-10 16:39:18,751 DEBUG    awx.main.dispatch task 3a2e7fe6-c18b-442d-9b42-6eec90ed73d6 starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:39:18,770 DEBUG    awx.main.dispatch task 30e1c774-5ed6-4407-971b-26a52dba1a85 is finished
+2019-09-10 16:39:18,778 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:39:18,779 DEBUG    awx.main.dispatch delivered 99edd66f-b9ee-4438-9d43-05e0649ce269 to worker[207] qsize 0
+2019-09-10 16:39:18,783 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:38:48.639879+00:00
+2019-09-10 16:39:18,785 DEBUG    awx.main.dispatch task 99edd66f-b9ee-4438-9d43-05e0649ce269 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:39:18,791 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:39:18,796 DEBUG    awx.main.dispatch task 3a2e7fe6-c18b-442d-9b42-6eec90ed73d6 is finished
+2019-09-10 16:39:18,804 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:39:18,821 DEBUG    awx.main.dispatch task 99edd66f-b9ee-4438-9d43-05e0649ce269 is finished
+2019-09-10 16:39:38,756 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(0e46737d-a8cb-4225-aaf9-6a5021af0c1a, queue=awx_private_queue)
+[2019-09-10 16:39:38,756: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(0e46737d-a8cb-4225-aaf9-6a5021af0c1a, queue=awx_private_queue)
+2019-09-10 16:39:38,770 DEBUG    awx.main.dispatch delivered 0e46737d-a8cb-4225-aaf9-6a5021af0c1a to worker[206] qsize 0
+2019-09-10 16:39:38,773 DEBUG    awx.main.dispatch task 0e46737d-a8cb-4225-aaf9-6a5021af0c1a starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:39:38,778 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:39:38,789 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:39:38,803 DEBUG    awx.main.dispatch task 0e46737d-a8cb-4225-aaf9-6a5021af0c1a is finished
+2019-09-10 16:39:48,723 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(7bff641a-03dd-4006-81f3-1a2a9f8340e6, queue=awx_private_queue)
+[2019-09-10 16:39:48,723: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(7bff641a-03dd-4006-81f3-1a2a9f8340e6, queue=awx_private_queue)
+2019-09-10 16:39:48,735 DEBUG    awx.main.dispatch delivered 7bff641a-03dd-4006-81f3-1a2a9f8340e6 to worker[207] qsize 0
+2019-09-10 16:39:48,738 DEBUG    awx.main.dispatch task 7bff641a-03dd-4006-81f3-1a2a9f8340e6 starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:39:48,745 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:39:48,747 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:39:18.780560+00:00
+2019-09-10 16:39:48,755 DEBUG    awx.main.dispatch task 7bff641a-03dd-4006-81f3-1a2a9f8340e6 is finished
+2019-09-10 16:39:58,756 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(d6f58ef7-2f88-4536-bae0-4276585dc5b6, queue=awx_private_queue)
+[2019-09-10 16:39:58,756: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(d6f58ef7-2f88-4536-bae0-4276585dc5b6, queue=awx_private_queue)
+2019-09-10 16:39:58,768 DEBUG    awx.main.dispatch delivered d6f58ef7-2f88-4536-bae0-4276585dc5b6 to worker[207] qsize 0
+2019-09-10 16:39:58,772 DEBUG    awx.main.dispatch task d6f58ef7-2f88-4536-bae0-4276585dc5b6 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:39:58,775 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:39:58,783 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:39:58,797 DEBUG    awx.main.dispatch task d6f58ef7-2f88-4536-bae0-4276585dc5b6 is finished
+No previous hash foundRESULT 2
+OKREADY
+2019-09-10 16:40:18,609 DEBUG    awx.main.dispatch publish awx.main.tasks.cluster_node_heartbeat(aa117f3a-ffe1-47e0-bc4b-4910157d43a3, queue=awx)
+[2019-09-10 16:40:18,609: DEBUG/Process-1] publish awx.main.tasks.cluster_node_heartbeat(aa117f3a-ffe1-47e0-bc4b-4910157d43a3, queue=awx)
+2019-09-10 16:40:18,635 DEBUG    awx.main.dispatch delivered aa117f3a-ffe1-47e0-bc4b-4910157d43a3 to worker[206] qsize 0
+2019-09-10 16:40:18,638 DEBUG    awx.main.dispatch task aa117f3a-ffe1-47e0-bc4b-4910157d43a3 starting awx.main.tasks.cluster_node_heartbeat(*[])
+2019-09-10 16:40:18,641 DEBUG    awx.main.tasks Cluster node heartbeat task.
+2019-09-10 16:40:18,653 DEBUG    awx.main.dispatch task aa117f3a-ffe1-47e0-bc4b-4910157d43a3 is finished
+2019-09-10 16:40:18,725 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(e0101992-514d-4e84-b008-250596a32fc2, queue=awx_private_queue)
+[2019-09-10 16:40:18,725: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(e0101992-514d-4e84-b008-250596a32fc2, queue=awx_private_queue)
+2019-09-10 16:40:18,737 DEBUG    awx.main.dispatch delivered e0101992-514d-4e84-b008-250596a32fc2 to worker[207] qsize 0
+2019-09-10 16:40:18,740 DEBUG    awx.main.dispatch task e0101992-514d-4e84-b008-250596a32fc2 starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:40:18,755 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(974337b3-413d-4c6c-9f82-1a0cf7246f04, queue=awx_private_queue)
+2019-09-10 16:40:18,757 DEBUG    awx.main.tasks Starting periodic scheduler
+[2019-09-10 16:40:18,755: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(974337b3-413d-4c6c-9f82-1a0cf7246f04, queue=awx_private_queue)
+2019-09-10 16:40:18,764 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:39:48.746092+00:00
+2019-09-10 16:40:18,773 DEBUG    awx.main.dispatch task e0101992-514d-4e84-b008-250596a32fc2 is finished
+2019-09-10 16:40:18,775 DEBUG    awx.main.dispatch delivered 974337b3-413d-4c6c-9f82-1a0cf7246f04 to worker[204] qsize 0
+2019-09-10 16:40:18,778 DEBUG    awx.main.dispatch task 974337b3-413d-4c6c-9f82-1a0cf7246f04 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:40:18,782 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:40:18,790 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:40:18,802 DEBUG    awx.main.dispatch task 974337b3-413d-4c6c-9f82-1a0cf7246f04 is finished
+2019-09-10 16:40:38,756 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(140e70b5-19a7-49e7-be2d-f3390450ffa0, queue=awx_private_queue)
+[2019-09-10 16:40:38,756: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(140e70b5-19a7-49e7-be2d-f3390450ffa0, queue=awx_private_queue)
+2019-09-10 16:40:38,770 DEBUG    awx.main.dispatch delivered 140e70b5-19a7-49e7-be2d-f3390450ffa0 to worker[204] qsize 0
+2019-09-10 16:40:38,773 DEBUG    awx.main.dispatch task 140e70b5-19a7-49e7-be2d-f3390450ffa0 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:40:38,776 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:40:38,784 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:40:38,798 DEBUG    awx.main.dispatch task 140e70b5-19a7-49e7-be2d-f3390450ffa0 is finished
+2019-09-10 16:40:48,723 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(bb03ab4f-f53e-4c68-8274-d97fdcf83ce1, queue=awx_private_queue)
+[2019-09-10 16:40:48,723: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(bb03ab4f-f53e-4c68-8274-d97fdcf83ce1, queue=awx_private_queue)
+2019-09-10 16:40:48,734 DEBUG    awx.main.dispatch delivered bb03ab4f-f53e-4c68-8274-d97fdcf83ce1 to worker[206] qsize 0
+2019-09-10 16:40:48,737 DEBUG    awx.main.dispatch task bb03ab4f-f53e-4c68-8274-d97fdcf83ce1 starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:40:48,844 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:40:48,845 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:40:18.761452+00:00
+2019-09-10 16:40:48,853 DEBUG    awx.main.dispatch task bb03ab4f-f53e-4c68-8274-d97fdcf83ce1 is finished
+2019-09-10 16:40:58,757 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(32162779-0d16-4901-9203-b9e954dde9b0, queue=awx_private_queue)
+[2019-09-10 16:40:58,757: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(32162779-0d16-4901-9203-b9e954dde9b0, queue=awx_private_queue)
+2019-09-10 16:40:58,775 DEBUG    awx.main.dispatch delivered 32162779-0d16-4901-9203-b9e954dde9b0 to worker[204] qsize 0
+2019-09-10 16:40:58,778 DEBUG    awx.main.dispatch task 32162779-0d16-4901-9203-b9e954dde9b0 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:40:58,782 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:40:58,792 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:40:58,807 DEBUG    awx.main.dispatch task 32162779-0d16-4901-9203-b9e954dde9b0 is finished
+RESULT 2
+OKREADY
+2019-09-10 16:41:18,621 DEBUG    awx.main.dispatch publish awx.main.tasks.cluster_node_heartbeat(0dfff93f-da84-44a9-8b7f-aecbc3c5c873, queue=awx)
+[2019-09-10 16:41:18,621: DEBUG/Process-1] publish awx.main.tasks.cluster_node_heartbeat(0dfff93f-da84-44a9-8b7f-aecbc3c5c873, queue=awx)
+2019-09-10 16:41:18,640 DEBUG    awx.main.dispatch delivered 0dfff93f-da84-44a9-8b7f-aecbc3c5c873 to worker[206] qsize 0
+2019-09-10 16:41:18,643 DEBUG    awx.main.dispatch task 0dfff93f-da84-44a9-8b7f-aecbc3c5c873 starting awx.main.tasks.cluster_node_heartbeat(*[])
+2019-09-10 16:41:18,646 DEBUG    awx.main.tasks Cluster node heartbeat task.
+2019-09-10 16:41:18,657 DEBUG    awx.main.dispatch task 0dfff93f-da84-44a9-8b7f-aecbc3c5c873 is finished
+2019-09-10 16:41:18,723 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(d5dbb07b-778d-4c2b-85e6-eba277e81202, queue=awx_private_queue)
+[2019-09-10 16:41:18,723: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(d5dbb07b-778d-4c2b-85e6-eba277e81202, queue=awx_private_queue)
+2019-09-10 16:41:18,735 DEBUG    awx.main.dispatch delivered d5dbb07b-778d-4c2b-85e6-eba277e81202 to worker[205] qsize 0
+2019-09-10 16:41:18,738 DEBUG    awx.main.dispatch task d5dbb07b-778d-4c2b-85e6-eba277e81202 starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:41:18,745 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:41:18,747 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:40:48.844676+00:00
+2019-09-10 16:41:18,755 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(b73e63e2-5380-4486-bb99-1794f78632cc, queue=awx_private_queue)
+[2019-09-10 16:41:18,755: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(b73e63e2-5380-4486-bb99-1794f78632cc, queue=awx_private_queue)
+2019-09-10 16:41:18,767 DEBUG    awx.main.dispatch task d5dbb07b-778d-4c2b-85e6-eba277e81202 is finished
+2019-09-10 16:41:18,773 DEBUG    awx.main.dispatch delivered b73e63e2-5380-4486-bb99-1794f78632cc to worker[205] qsize 0
+2019-09-10 16:41:18,776 DEBUG    awx.main.dispatch task b73e63e2-5380-4486-bb99-1794f78632cc starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:41:18,780 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:41:18,788 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:41:18,804 DEBUG    awx.main.dispatch task b73e63e2-5380-4486-bb99-1794f78632cc is finished
+2019-09-10 16:41:38,769 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(ae9d14b7-8cbf-4655-9ebc-8ea1a5be6069, queue=awx_private_queue)
+[2019-09-10 16:41:38,769: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(ae9d14b7-8cbf-4655-9ebc-8ea1a5be6069, queue=awx_private_queue)
+2019-09-10 16:41:38,783 DEBUG    awx.main.dispatch delivered ae9d14b7-8cbf-4655-9ebc-8ea1a5be6069 to worker[205] qsize 0
+2019-09-10 16:41:38,786 DEBUG    awx.main.dispatch task ae9d14b7-8cbf-4655-9ebc-8ea1a5be6069 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:41:38,790 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:41:38,799 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:41:38,812 DEBUG    awx.main.dispatch task ae9d14b7-8cbf-4655-9ebc-8ea1a5be6069 is finished
+2019-09-10 16:41:48,725 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(7061ec76-be7d-45f2-af32-aa767eab5bdf, queue=awx_private_queue)
+[2019-09-10 16:41:48,725: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(7061ec76-be7d-45f2-af32-aa767eab5bdf, queue=awx_private_queue)
+2019-09-10 16:41:48,748 DEBUG    awx.main.dispatch delivered 7061ec76-be7d-45f2-af32-aa767eab5bdf to worker[204] qsize 0
+2019-09-10 16:41:48,751 DEBUG    awx.main.dispatch task 7061ec76-be7d-45f2-af32-aa767eab5bdf starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:41:48,854 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:41:48,855 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:41:18.746498+00:00
+2019-09-10 16:41:48,863 DEBUG    awx.main.dispatch task 7061ec76-be7d-45f2-af32-aa767eab5bdf is finished
+2019-09-10 16:41:58,771 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(f9d5412a-eb09-409c-bad2-d3ac9390bc8d, queue=awx_private_queue)
+[2019-09-10 16:41:58,771: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(f9d5412a-eb09-409c-bad2-d3ac9390bc8d, queue=awx_private_queue)
+2019-09-10 16:41:58,783 DEBUG    awx.main.dispatch delivered f9d5412a-eb09-409c-bad2-d3ac9390bc8d to worker[207] qsize 0
+2019-09-10 16:41:58,786 DEBUG    awx.main.dispatch task f9d5412a-eb09-409c-bad2-d3ac9390bc8d starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:41:58,790 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:41:58,798 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:41:58,814 DEBUG    awx.main.dispatch task f9d5412a-eb09-409c-bad2-d3ac9390bc8d is finished
+RESULT 2
+OKREADY
+2019-09-10 16:42:18,625 DEBUG    awx.main.dispatch publish awx.main.tasks.cluster_node_heartbeat(513a5c3c-cf13-46cf-a126-901210b22427, queue=awx)
+[2019-09-10 16:42:18,625: DEBUG/Process-1] publish awx.main.tasks.cluster_node_heartbeat(513a5c3c-cf13-46cf-a126-901210b22427, queue=awx)
+2019-09-10 16:42:18,639 DEBUG    awx.main.dispatch delivered 513a5c3c-cf13-46cf-a126-901210b22427 to worker[206] qsize 0
+2019-09-10 16:42:18,641 DEBUG    awx.main.dispatch task 513a5c3c-cf13-46cf-a126-901210b22427 starting awx.main.tasks.cluster_node_heartbeat(*[])
+2019-09-10 16:42:18,645 DEBUG    awx.main.tasks Cluster node heartbeat task.
+2019-09-10 16:42:18,654 DEBUG    awx.main.dispatch task 513a5c3c-cf13-46cf-a126-901210b22427 is finished
+2019-09-10 16:42:18,724 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(c8cb0384-d3f9-43c7-b9bb-0034a59a150f, queue=awx_private_queue)
+[2019-09-10 16:42:18,724: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(c8cb0384-d3f9-43c7-b9bb-0034a59a150f, queue=awx_private_queue)
+2019-09-10 16:42:18,734 DEBUG    awx.main.dispatch delivered c8cb0384-d3f9-43c7-b9bb-0034a59a150f to worker[206] qsize 0
+2019-09-10 16:42:18,737 DEBUG    awx.main.dispatch task c8cb0384-d3f9-43c7-b9bb-0034a59a150f starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:42:18,744 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:42:18,747 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:41:48.854646+00:00
+2019-09-10 16:42:18,754 DEBUG    awx.main.dispatch task c8cb0384-d3f9-43c7-b9bb-0034a59a150f is finished
+2019-09-10 16:42:18,768 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(da8b3953-2ef9-42bc-8546-3fdc2f3d0edf, queue=awx_private_queue)
+[2019-09-10 16:42:18,768: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(da8b3953-2ef9-42bc-8546-3fdc2f3d0edf, queue=awx_private_queue)
+2019-09-10 16:42:18,777 DEBUG    awx.main.dispatch delivered da8b3953-2ef9-42bc-8546-3fdc2f3d0edf to worker[207] qsize 0
+2019-09-10 16:42:18,780 DEBUG    awx.main.dispatch task da8b3953-2ef9-42bc-8546-3fdc2f3d0edf starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:42:18,783 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:42:18,791 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:42:18,803 DEBUG    awx.main.dispatch task da8b3953-2ef9-42bc-8546-3fdc2f3d0edf is finished
+2019-09-10 16:42:38,774 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(12281e1c-67a7-44a6-8465-a2ecf9c8437f, queue=awx_private_queue)
+[2019-09-10 16:42:38,774: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(12281e1c-67a7-44a6-8465-a2ecf9c8437f, queue=awx_private_queue)
+2019-09-10 16:42:38,785 DEBUG    awx.main.dispatch delivered 12281e1c-67a7-44a6-8465-a2ecf9c8437f to worker[205] qsize 0
+2019-09-10 16:42:38,788 DEBUG    awx.main.dispatch task 12281e1c-67a7-44a6-8465-a2ecf9c8437f starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:42:38,792 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:42:38,799 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:42:38,812 DEBUG    awx.main.dispatch task 12281e1c-67a7-44a6-8465-a2ecf9c8437f is finished
+2019-09-10 16:42:48,724 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(fa610eca-0b43-4b35-9145-24b80603b49b, queue=awx_private_queue)
+[2019-09-10 16:42:48,724: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(fa610eca-0b43-4b35-9145-24b80603b49b, queue=awx_private_queue)
+2019-09-10 16:42:48,744 DEBUG    awx.main.dispatch delivered fa610eca-0b43-4b35-9145-24b80603b49b to worker[204] qsize 0
+2019-09-10 16:42:48,747 DEBUG    awx.main.dispatch task fa610eca-0b43-4b35-9145-24b80603b49b starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:42:48,753 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:42:48,850 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:42:18.745689+00:00
+2019-09-10 16:42:48,855 DEBUG    awx.main.dispatch task fa610eca-0b43-4b35-9145-24b80603b49b is finished
+2019-09-10 16:42:58,775 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(9c106e33-cd5b-4236-89ce-20f96dba27d3, queue=awx_private_queue)
+[2019-09-10 16:42:58,775: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(9c106e33-cd5b-4236-89ce-20f96dba27d3, queue=awx_private_queue)
+2019-09-10 16:42:58,791 DEBUG    awx.main.dispatch delivered 9c106e33-cd5b-4236-89ce-20f96dba27d3 to worker[207] qsize 0
+2019-09-10 16:42:58,795 DEBUG    awx.main.dispatch task 9c106e33-cd5b-4236-89ce-20f96dba27d3 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:42:58,799 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:42:58,807 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:42:58,822 DEBUG    awx.main.dispatch task 9c106e33-cd5b-4236-89ce-20f96dba27d3 is finished
+RESULT 2
+OKREADY
+2019-09-10 16:43:18,635 DEBUG    awx.main.dispatch publish awx.main.tasks.cluster_node_heartbeat(a556fac4-3c3b-4f15-b323-99f87a5fdf25, queue=awx)
+[2019-09-10 16:43:18,635: DEBUG/Process-1] publish awx.main.tasks.cluster_node_heartbeat(a556fac4-3c3b-4f15-b323-99f87a5fdf25, queue=awx)
+2019-09-10 16:43:18,657 DEBUG    awx.main.dispatch delivered a556fac4-3c3b-4f15-b323-99f87a5fdf25 to worker[207] qsize 0
+2019-09-10 16:43:18,659 DEBUG    awx.main.dispatch task a556fac4-3c3b-4f15-b323-99f87a5fdf25 starting awx.main.tasks.cluster_node_heartbeat(*[])
+2019-09-10 16:43:18,663 DEBUG    awx.main.tasks Cluster node heartbeat task.
+2019-09-10 16:43:18,674 DEBUG    awx.main.dispatch task a556fac4-3c3b-4f15-b323-99f87a5fdf25 is finished
+2019-09-10 16:43:18,724 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(152aa72c-0507-40c1-9ebb-7769b4ecbe75, queue=awx_private_queue)
+[2019-09-10 16:43:18,724: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(152aa72c-0507-40c1-9ebb-7769b4ecbe75, queue=awx_private_queue)
+2019-09-10 16:43:18,736 DEBUG    awx.main.dispatch delivered 152aa72c-0507-40c1-9ebb-7769b4ecbe75 to worker[206] qsize 0
+2019-09-10 16:43:18,739 DEBUG    awx.main.dispatch task 152aa72c-0507-40c1-9ebb-7769b4ecbe75 starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:43:18,746 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:43:18,748 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:42:48.849098+00:00
+2019-09-10 16:43:18,754 DEBUG    awx.main.dispatch task 152aa72c-0507-40c1-9ebb-7769b4ecbe75 is finished
+2019-09-10 16:43:18,774 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(35513c34-925d-4808-ba5e-98751f2c6e2f, queue=awx_private_queue)
+[2019-09-10 16:43:18,774: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(35513c34-925d-4808-ba5e-98751f2c6e2f, queue=awx_private_queue)
+2019-09-10 16:43:18,784 DEBUG    awx.main.dispatch delivered 35513c34-925d-4808-ba5e-98751f2c6e2f to worker[204] qsize 0
+2019-09-10 16:43:18,787 DEBUG    awx.main.dispatch task 35513c34-925d-4808-ba5e-98751f2c6e2f starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:43:18,790 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:43:18,798 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:43:18,809 DEBUG    awx.main.dispatch task 35513c34-925d-4808-ba5e-98751f2c6e2f is finished
+2019-09-10 16:43:38,784 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(db48c341-8265-41ec-bc80-71ff4a2951dd, queue=awx_private_queue)
+[2019-09-10 16:43:38,784: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(db48c341-8265-41ec-bc80-71ff4a2951dd, queue=awx_private_queue)
+2019-09-10 16:43:38,794 DEBUG    awx.main.dispatch delivered db48c341-8265-41ec-bc80-71ff4a2951dd to worker[207] qsize 0
+2019-09-10 16:43:38,797 DEBUG    awx.main.dispatch task db48c341-8265-41ec-bc80-71ff4a2951dd starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:43:38,800 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:43:38,808 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:43:38,824 DEBUG    awx.main.dispatch task db48c341-8265-41ec-bc80-71ff4a2951dd is finished
+2019-09-10 16:43:48,726 DEBUG    awx.main.dispatch publish awx.main.tasks.awx_periodic_scheduler(6e0ca8e2-b7a8-45ba-95ac-f4cad9c64435, queue=awx_private_queue)
+[2019-09-10 16:43:48,726: DEBUG/Process-1] publish awx.main.tasks.awx_periodic_scheduler(6e0ca8e2-b7a8-45ba-95ac-f4cad9c64435, queue=awx_private_queue)
+2019-09-10 16:43:48,747 DEBUG    awx.main.dispatch delivered 6e0ca8e2-b7a8-45ba-95ac-f4cad9c64435 to worker[207] qsize 0
+2019-09-10 16:43:48,751 DEBUG    awx.main.dispatch task 6e0ca8e2-b7a8-45ba-95ac-f4cad9c64435 starting awx.main.tasks.awx_periodic_scheduler(*[])
+2019-09-10 16:43:48,758 DEBUG    awx.main.tasks Starting periodic scheduler
+2019-09-10 16:43:48,760 DEBUG    awx.main.tasks Last scheduler run was: 2019-09-10 16:43:18.747142+00:00
+2019-09-10 16:43:48,766 DEBUG    awx.main.dispatch task 6e0ca8e2-b7a8-45ba-95ac-f4cad9c64435 is finished
+2019-09-10 16:43:58,785 DEBUG    awx.main.dispatch publish awx.main.scheduler.tasks.run_task_manager(dfa34968-ad99-4b52-8062-5516d508f117, queue=awx_private_queue)
+[2019-09-10 16:43:58,785: DEBUG/Process-1] publish awx.main.scheduler.tasks.run_task_manager(dfa34968-ad99-4b52-8062-5516d508f117, queue=awx_private_queue)
+2019-09-10 16:43:58,835 DEBUG    awx.main.dispatch delivered dfa34968-ad99-4b52-8062-5516d508f117 to worker[205] qsize 0
+2019-09-10 16:43:58,839 DEBUG    awx.main.dispatch task dfa34968-ad99-4b52-8062-5516d508f117 starting awx.main.scheduler.tasks.run_task_manager(*[])
+2019-09-10 16:43:58,963 DEBUG    awx.main.scheduler Running Tower task manager.
+2019-09-10 16:43:58,968 DEBUG    awx.main.scheduler Starting Scheduler
+2019-09-10 16:43:58,990 DEBUG    awx.main.dispatch task dfa34968-ad99-4b52-8062-5516d508f117 is finished
+RESULT 2
+OKREADY
+[vagrant@awx ~]$

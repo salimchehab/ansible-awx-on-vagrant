@@ -1,0 +1,28 @@
+---
+- name: Create a sample Tower project and job template
+  hosts: localhost
+  gather_facts: no
+  vars:
+    tower_username: "{{ awx_admin_user }}"
+    tower_password: "{{ awx_admin_password }}"
+    tower_host: "{{ awx_host }}"
+    tower_verify_ssl: no
+
+  tasks:
+    - name: create demo2 project
+      tower_project:
+        name: "demo2-ansible-tower-samples"
+        description: "This is a demo2 project (ansible-tower-samples)"
+        state: present
+        scm_url: "https://github.com/ansible/ansible-tower-samples.git"
+        scm_update_on_launch: yes
+        scm_type: git
+
+    - name: create demo2 job template
+      tower_job_template:
+        name: "demo2-template"
+        inventory: "Demo Inventory"
+        state: present
+        job_type: "run"
+        project: "demo2-ansible-tower-samples"
+        playbook: "hello_world.yml"

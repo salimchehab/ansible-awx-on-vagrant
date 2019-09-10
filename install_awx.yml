@@ -1,0 +1,21 @@
+---
+- name: Install AWX
+  hosts: tower
+  become: true
+
+  vars:
+    pip_install_packages:
+      - name: docker-compose
+      - name: ansible-tower-cli
+    nodejs_version: "6.x"
+    nodejs_install_npm_user: "{{ awx_user }}"
+    awx_version: 6.1.0
+
+  roles:
+    - geerlingguy.repo-epel
+    - geerlingguy.git
+    - geerlingguy.ansible
+    - geerlingguy.docker
+    - geerlingguy.pip
+    - geerlingguy.nodejs
+    - geerlingguy.awx

@@ -1,0 +1,33 @@
+Host awx
+  HostName 127.0.0.1
+  User vagrant
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/salimchehab/Downloads/ansible-awx-on-vagrant/.vagrant/machines/awx/virtualbox/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+
+Host node01
+  HostName 127.0.0.1
+  User vagrant
+  Port 2200
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/salimchehab/Downloads/ansible-awx-on-vagrant/.vagrant/machines/node01/virtualbox/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+
+Host node10
+  HostName 127.0.0.1
+  User vagrant
+  Port 2201
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/salimchehab/Downloads/ansible-awx-on-vagrant/.vagrant/machines/node10/virtualbox/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+
