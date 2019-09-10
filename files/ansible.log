@@ -1557,3 +1557,31 @@ Response: {"playbook":["Playbook not found for project."]}
 }
 2019-09-10 20:50:06,780 p=70921 u=salimchehab |  PLAY RECAP ***********************************************************************************************************************************************************************************
 2019-09-10 20:50:06,780 p=70921 u=salimchehab |  localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2019-09-10 20:52:30,605 p=71090 u=salimchehab |  - downloading role 'repo-epel', owned by geerlingguy
+2019-09-10 20:52:33,626 p=71090 u=salimchehab |  - downloading role from https://github.com/geerlingguy/ansible-role-repo-epel/archive/1.2.4.tar.gz
+2019-09-10 20:52:38,919 p=71090 u=salimchehab |  - extracting geerlingguy.repo-epel to /Users/salimchehab/Downloads/ansible-awx-on-vagrant/roles/geerlingguy.repo-epel
+2019-09-10 20:52:38,925 p=71090 u=salimchehab |  - geerlingguy.repo-epel (1.2.4) was installed successfully
+2019-09-10 20:52:40,094 p=71090 u=salimchehab |  - downloading role 'git', owned by geerlingguy
+2019-09-10 20:52:43,224 p=71090 u=salimchehab |  - downloading role from https://github.com/geerlingguy/ansible-role-git/archive/2.0.5.tar.gz
+2019-09-10 20:52:46,431 p=71090 u=salimchehab |  - extracting geerlingguy.git to /Users/salimchehab/Downloads/ansible-awx-on-vagrant/roles/geerlingguy.git
+2019-09-10 20:52:46,440 p=71090 u=salimchehab |  - geerlingguy.git (2.0.5) was installed successfully
+2019-09-10 20:52:47,772 p=71090 u=salimchehab |  - downloading role 'ansible', owned by geerlingguy
+2019-09-10 20:52:51,105 p=71090 u=salimchehab |  - downloading role from https://github.com/geerlingguy/ansible-role-ansible/archive/2.0.1.tar.gz
+2019-09-10 20:52:54,417 p=71090 u=salimchehab |  - extracting geerlingguy.ansible to /Users/salimchehab/Downloads/ansible-awx-on-vagrant/roles/geerlingguy.ansible
+2019-09-10 20:52:54,426 p=71090 u=salimchehab |  - geerlingguy.ansible (2.0.1) was installed successfully
+2019-09-10 20:52:55,733 p=71090 u=salimchehab |  - downloading role 'docker', owned by geerlingguy
+2019-09-10 20:52:59,081 p=71090 u=salimchehab |  - downloading role from https://github.com/geerlingguy/ansible-role-docker/archive/2.5.2.tar.gz
+2019-09-10 20:53:02,491 p=71090 u=salimchehab |  - extracting geerlingguy.docker to /Users/salimchehab/Downloads/ansible-awx-on-vagrant/roles/geerlingguy.docker
+2019-09-10 20:53:02,500 p=71090 u=salimchehab |  - geerlingguy.docker (2.5.2) was installed successfully
+2019-09-10 20:53:03,915 p=71090 u=salimchehab |  - downloading role 'pip', owned by geerlingguy
+2019-09-10 20:53:07,562 p=71090 u=salimchehab |  - downloading role from https://github.com/geerlingguy/ansible-role-pip/archive/1.3.0.tar.gz
+2019-09-10 20:53:10,863 p=71090 u=salimchehab |  - extracting geerlingguy.pip to /Users/salimchehab/Downloads/ansible-awx-on-vagrant/roles/geerlingguy.pip
+2019-09-10 20:53:10,870 p=71090 u=salimchehab |  - geerlingguy.pip (1.3.0) was installed successfully
+2019-09-10 20:53:12,080 p=71090 u=salimchehab |  - downloading role 'nodejs', owned by geerlingguy
+2019-09-10 20:53:15,253 p=71090 u=salimchehab |  - downloading role from https://github.com/geerlingguy/ansible-role-nodejs/archive/5.0.0.tar.gz
+2019-09-10 20:53:18,506 p=71090 u=salimchehab |  - extracting geerlingguy.nodejs to /Users/salimchehab/Downloads/ansible-awx-on-vagrant/roles/geerlingguy.nodejs
+2019-09-10 20:53:18,514 p=71090 u=salimchehab |  - geerlingguy.nodejs (5.0.0) was installed successfully
+2019-09-10 20:53:19,889 p=71090 u=salimchehab |  - downloading role 'awx', owned by geerlingguy
+2019-09-10 20:53:23,488 p=71090 u=salimchehab |  - downloading role from https://github.com/geerlingguy/ansible-role-awx/archive/1.2.0.tar.gz
+2019-09-10 20:53:26,939 p=71090 u=salimchehab |  - extracting geerlingguy.awx to /Users/salimchehab/Downloads/ansible-awx-on-vagrant/roles/geerlingguy.awx
+2019-09-10 20:53:26,946 p=71090 u=salimchehab |  - geerlingguy.awx (1.2.0) was installed successfully
